@@ -1,0 +1,7 @@
+<div>
+    <ul class="container">
+        <li class="book-list" *ngFor="let book of books" (click)="pressMe()"> {{book}} </li>
+    </ul>
+    <button (click)="increment()"> Increment Count </button>
+    <p> {{ count }}</p>
+</div>
