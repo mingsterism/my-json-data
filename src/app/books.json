@@ -1,14 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
-
-export interface BookItem {
-    author: string; 
-    title: string;
-    datePublished: number
-}
-
-
-const MOCKBOOKS = [
+[
     { "author": "James0", "title": "A funny Book0", "datePublished": "Thu Dec 01 2010 00:00:00 GMT+0800 (MYT)"},
     { "author": "James1", "title": "A funny Book1", "datePublished": "Thu Dec 02 2010 00:00:00 GMT+0800 (MYT)"},
     { "author": "James2", "title": "A funny Book2", "datePublished": "Thu Dec 03 2010 00:00:00 GMT+0800 (MYT)"},
@@ -20,24 +10,3 @@ const MOCKBOOKS = [
     { "author": "James8", "title": "A funny Book8", "datePublished": "Thu Dec 09 2010 00:00:00 GMT+0800 (MYT)"},
     { "author": "James9", "title": "A funny Book9", "datePublished": "Thu Dec 10 2010 00:00:00 GMT+0800 (MYT)"}
 ]
-
-
-@Injectable()
-export class BookListService {
-    public booksList:EventEmitter<object> = new EventEmitter() 
-
-    constructor(public http:HttpClient) {  }
-
-    getBooksMockDelay() : Promise<object> {
-        return new Promise( (resolve) => {
-            setTimeout( () => resolve(MOCKBOOKS) , 4000)
-        })
-        // Unable to subscribe to json data. unable to call localhost:4200/api/books.json
-        // this.http.get('./app/books.json').subscribe( (data) => 
-        // this.booksList = data['results']
-        // )}
-    }
-    loadBooks(): void {
-        this.getBooksMockDelay().then( (data) => this.booksList.emit(data))
-    }
-}

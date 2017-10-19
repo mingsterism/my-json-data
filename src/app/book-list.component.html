@@ -1,7 +1,10 @@
 <div>
     <ul class="container">
-        <li class="book-list" *ngFor="let book of books" (click)="pressMe()"> {{book}} </li>
+        <li class="book-list" *ngFor="let book of books" (click)="pressMe()"> {{book.title}} </li>
+        <!-- <li> {{this.bookServices.booksList | async}}</li> -->
     </ul>
+    <p> ID is {{ bookServices.id | async }} </p>
+    <p> Another Id {{ changedNumber }}</p>
     <button (click)="increment()"> Increment Count </button>
     <p> {{ count }}</p>
 </div>

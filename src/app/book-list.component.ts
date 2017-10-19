@@ -8,17 +8,19 @@ import { BookListService } from './book-list.services'
     templateUrl: './book-list.component.html',
     styleUrls: ['./book-list.component.css']
 })
-export class BookList implements OnInit{
-    books: string[]
+export class BookList implements OnInit {
+    books: any
     count: number
+    changedNumber: number
 
     constructor ( public bookServices: BookListService ) { 
-        this.books = ['book1', 'book2', 'book3']
         this.count = 0
-        this.bookServices.method1()
-        console.log(this.bookServices)
+        this.bookServices.booksList.subscribe( (data) => {
+            this.books = data
+        })
+        
     }
-
+    
     ngOnInit(): void {
         this.bookServices.loadBooks()
     }
