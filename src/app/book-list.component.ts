@@ -7,9 +7,8 @@ import { BookListService, BookItem } from './book-list.services'
     styleUrls: ['./book-list.component.css']
 })
 export class BookList implements OnInit {
-    @Output()
+    // Is @Output needed for onSelectBook ?
     onSelectBook: EventEmitter<number> = new EventEmitter<number>()
-
     bookList: Set<number>
     books: BookItem
     count: number
@@ -33,5 +32,6 @@ export class BookList implements OnInit {
             this.bookList.add(bookIndex)
         }
         this.onSelectBook.emit(this.bookList.size)        
+        this.bookServices.selectingBook(bookIndex)
     }
 }

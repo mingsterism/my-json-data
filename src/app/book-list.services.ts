@@ -10,7 +10,6 @@ export interface BookItem {
 
 const MOCKBOOKS = [
     { "author": "James0", "title": "Book0", "datePublished": "Thu Dec 01 2010 00:00:00 GMT+0800 (MYT)"},
-    { "author": "James0", "title": "Book0", "datePublished": "Thu Dec 01 2010 00:00:00 GMT+0800 (MYT)"},
     { "author": "James1", "title": "Book1", "datePublished": "Thu Dec 02 2010 00:00:00 GMT+0800 (MYT)"},
     { "author": "James2", "title": "Book2", "datePublished": "Thu Dec 03 2010 00:00:00 GMT+0800 (MYT)"},
     { "author": "James3", "title": "Book3", "datePublished": "Thu Dec 04 2010 00:00:00 GMT+0800 (MYT)"},
@@ -27,9 +26,11 @@ const MOCKBOOKS = [
 export class BookListService {
     public booksList:EventEmitter<BookItem> = new EventEmitter() 
     e: BookItem
+    selectedBooks: Array<BookItem>
+    localBookCache: BookItem
     
-    constructor(public http:HttpClient) { 
-
+    constructor( ) { 
+        this.selectedBooks = []
      }
 
     getBooksMockDelay() : Promise<object> {
@@ -44,6 +45,19 @@ export class BookListService {
 
     loadBooks(): void {
         this.getBooksMockDelay()
-            .then( (data) => this.booksList.emit(Object.assign(data, this.e)))
+            .then( (data) => {
+                this.booksList.emit(Object.assign(data, this.e))
+                this.localBookCache = Object.assign(data, this.e)
+            })
+    }
+
+    selectingBook(book): void {
+        const bookIndex = this.selectedBooks.indexOf(this.localBookCache[book])
+        console.log(bookIndex)
+        if (bookIndex >= 0) {
+            this.selectedBooks.splice(bookIndex, 1)
+        } else {
+            this.selectedBooks.push(this.localBookCache[book])
+        }
     }
 }

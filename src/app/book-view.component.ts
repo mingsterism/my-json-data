@@ -1,16 +1,16 @@
-import { EventEmitter, Output, Component, OnInit } from '@angular/core'
+import { EventEmitter, Output, Component } from '@angular/core'
+import { BookListService, BookItem } from './book-list.services'
 
 @Component({
     selector: 'book-view',
     templateUrl: './book-view.component.html',
     styleUrls: ['./book-view.component.css']
 })
-export class BookView implements OnInit {
+export class BookView {
     bookCount: number
-    constructor ( ) {  }
+    selectedBooks: Array<BookItem>
+    constructor (public bookServices: BookListService ) {  }
 
-    ngOnInit() { }
-    
     bookSelected(event): void {
         console.log("Book selected", event)
         this.bookCount = event

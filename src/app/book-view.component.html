@@ -5,10 +5,12 @@
     <div style="flex: 1">
         <h1> Books Count </h1>
         <p style="font-size: 40px"> {{bookCount}} </p>
+        <h1>Selected Books</h1> 
+        <ul>
+            <li *ngFor="let book of bookServices.selectedBooks"> 
+                {{book.title}}
+                {{book.author}}
+            </li>
+        </ul>
     </div>
-
-    <!-- <div style="display:flex; flex-direction: row">
-        <div style="background-color: black; width: 100px; height: 100px"> </div>
-        <div style="background-color: yellow; width: 100px; height: 100px"> </div>
-    </div> -->
 </div>
