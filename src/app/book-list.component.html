@@ -1,10 +1,15 @@
-<div>
-    <ul class="container">
-        <li class="book-list" *ngFor="let book of books" (click)="pressMe()"> {{book.title}} </li>
-        <!-- <li> {{this.bookServices.booksList | async}}</li> -->
+<div style="flex:1">
+    <ul style="list-style:none;">
+        <li myHighlight
+            *ngFor="let book of books; let i = index;" 
+            class="book-list" 
+            [attr.index]="i" 
+            [ngClass]="{'active': bookList.has(i) }" 
+            (click)="pressMe(i)"
+            > 
+            <span style="color:black">Title: </span> {{book.title}} 
+            <span style="color:black">Author: </span> {{book.author}} 
+        </li>
     </ul>
-    <p> ID is {{ bookServices.id | async }} </p>
-    <p> Another Id {{ changedNumber }}</p>
-    <button (click)="increment()"> Increment Count </button>
-    <p> {{ count }}</p>
 </div>
+

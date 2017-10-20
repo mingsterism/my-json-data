@@ -1,10 +1,8 @@
 .book-list {
     font-size: 3em;
     color: blue;
-    background-color: lightgray;
-    background-blend-mode: darken;
     margin: 8px;
 }
-.container {
-    width: 30%;
+.active {
+    background-color: gold;
 }
